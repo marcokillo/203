@@ -1,184 +1,195 @@
-<!--
-Vintage 4-digit passcode page
-- Replace 'background.jpg' with your image (same folder) or change the path in the <img id="bgImage"> src.
-- Replace 'candle.png' with a high-quality candle image (transparent PNG recommended) or change the path in the <img id="candle"> src.
-- Correct passcode: 1402  (accepts Persian digits as well)
-- Text shown on success (popup): "لطفا پاکت 203 را باز کنید"
-- Text shown on failure: "دوباره تلاش کنید"
--->
-
 <!doctype html>
 <html lang="fa">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ورود رمز — Enter 4-digit code</title>
+  <title>ورودی رمز — وینتج</title>
 
-  <!-- Classic / vintage fonts (change if you want another) -->
-  <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- فونت‌های کلاسیک (قابل تغییر) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Old+Standard+TT&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg-overlay: rgba(30,20,10,0.45);
-      --accent: #d9c6a3;
-      --glass: rgba(255,255,255,0.06);
-      --text: #efe6da;
+      --bg:#efe6da; /* وینتج روشن */
+      --card:#f8f3ef;
+      --accent:#5b3a29;
+      --muted:#8b7a6b;
     }
-    html,body{height:100%;margin:0;font-family:'Cormorant Garamond', 'Old Standard TT', serif;background:#222;color:var(--text)}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:'Playfair Display', 'Old Standard TT', serif;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(91,58,41,0.06), transparent), var(--bg);
+      -webkit-font-smoothing:antialiased;
+      direction:rtl;
+      color:var(--accent);
+      display:flex;align-items:center;justify-content:center;padding:24px;
+    }
 
-    /* full-bleed background image (you can replace the <img> src) */
-    .bg-wrap{position:fixed;inset:0;overflow:hidden;z-index:0}
-    .bg-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%) contrast(95%) sepia(20%) brightness(85%);transform:scale(1.02)}
-    .bg-overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(8,4,2,0.55));mix-blend-mode:multiply;z-index:1}
+    /* پس‌زمینهٔ قابل جایگزینی (کاربر تصویر خودش را جایگزین کند) */
+    .scene{
+      position:relative;
+      width:980px;max-width:96vw;height:620px;max-height:86vh;
+      border-radius:18px;overflow:hidden;
+      box-shadow:0 18px 50px rgba(11,9,8,0.18);
+      background-image: url('placeholder-background.jpg'); /* جایگزین کنید */
+      background-size:cover;background-position:center;
+      display:flex;align-items:center;justify-content:center;
+    }
 
-    /* centered card */
-    .card{position:relative;z-index:2;min-width:320px;max-width:520px;margin:8vh auto;padding:34px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));box-shadow:0 10px 40px rgba(0,0,0,0.6);backdrop-filter: blur(3px);border:1px solid rgba(255,255,255,0.03)}
+    .vignette{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.28));pointer-events:none}
 
-    h1{font-family:'Old Standard TT', serif;font-size:28px;margin:0 0 12px;color:var(--accent);letter-spacing:1px;text-align:center}
-    p.lead{margin:0 0 18px;text-align:center;opacity:0.95}
+    .card{
+      position:relative;z-index:5;width:560px;background:linear-gradient(180deg, rgba(255,255,245,0.9), rgba(250,245,240,0.86));
+      border-radius:12px;padding:34px 36px 46px;box-shadow:0 8px 30px rgba(10,8,6,0.18);
+      border:1px solid rgba(91,58,41,0.06);
+      text-align:center;
+    }
 
-    .input-row{display:flex;gap:12px;align-items:center;justify-content:center}
+    h1{font-family:'Cinzel', serif;margin:0 0 8px;font-size:24px;letter-spacing:1px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+
+    label.input-label{display:block;margin:4px 0 8px;font-weight:700;font-family:'Old Standard TT', serif;text-transform:none}
+
+    .input-wrap{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:8px}
     input.code{
-      width:230px;padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);font-size:18px;text-align:center;font-family:'Old Standard TT', serif;background:transparent;color:var(--text);outline:none
+      font-family:'Cinzel', 'Times New Roman', serif;
+      font-size:36px;padding:12px 18px;border-radius:8px;border:2px solid rgba(91,58,41,0.12);width:220px;text-align:center;outline:none;
+      background:transparent;
+      -moz-appearance:textfield;
     }
-    button.check{
-      padding:12px 16px;border-radius:10px;border:none;background:var(--accent);color:#2b1f12;font-weight:700;cursor:pointer;font-family:'Old Standard TT', serif;box-shadow:0 6px 18px rgba(0,0,0,0.4)
+    input.code:focus{box-shadow:0 4px 18px rgba(91,58,41,0.12);border-color:var(--accent)}
+
+    button.btn{
+      background:linear-gradient(180deg,var(--accent),#40261a);color:#fff;border:0;padding:12px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Cinzel';
+      box-shadow:0 8px 20px rgba(64,38,26,0.28);
     }
 
-    .hint{margin-top:12px;text-align:center;font-size:15px;color:rgba(239,230,218,0.85)}
-    .msg{height:22px;margin-top:12px;text-align:center;font-weight:700}
+    .hint{margin-top:12px;color:#b34f2f;font-weight:700;min-height:22px}
 
-    /* vintage decorations */
-    .ornament{display:block;width:100%;height:10px;background:linear-gradient(90deg, transparent, rgba(213,180,140,0.18), transparent);margin:18px 0;border-radius:3px}
+    /* شمع در پایین صفحه (قابل جایگزینی) */
+    .candle{
+      position:absolute;bottom:18px;left:24px;z-index:6;display:flex;align-items:flex-end;gap:12px;pointer-events:none;
+    }
+    .candle img{height:180px;filter:drop-shadow(0 18px 40px rgba(10,8,6,0.45));border-radius:8px}
 
-    /* candle at bottom */
-    #candle{position:fixed;left:50%;transform:translateX(-50%);bottom:8px;z-index:3;width:160px;max-width:22vw;filter:drop-shadow(0 18px 30px rgba(0,0,0,0.6))}
+    /* پاپ‌آپ */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(6,4,3,0.52);display:none;align-items:center;justify-content:center;z-index:50}
+    .modal{background:var(--card);padding:28px;border-radius:12px;max-width:420px;text-align:center;border:1px solid rgba(91,58,41,0.08);box-shadow:0 20px 60px rgba(6,4,3,0.4)}
+    .modal h2{margin:0 0 8px;font-family:'Cinzel'}
+    .modal p{margin:0 0 16px}
+    .modal button{background:transparent;border:1px solid var(--accent);padding:8px 14px;border-radius:8px;cursor:pointer}
 
-    /* modal popup */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:100;visibility:hidden;opacity:0;transition:opacity .25s, visibility .25s}
-    .modal{background:#1a1008;color:var(--text);padding:28px;border-radius:12px;max-width:420px;width:90%;box-shadow:0 18px 60px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.03);text-align:center}
-    .modal.show{transform:none}
-    .modal h2{margin:0 0 8px;font-family:'Old Standard TT',serif}
-    .modal p{margin:8px 0 0}
-    .modal button{margin-top:18px;padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:#241b13;font-weight:700;cursor:pointer}
-
-    /* responsive */
-    @media (max-width:420px){.card{margin:6vh 12px;padding:20px}.input-row{flex-direction:column}.input-row input.code{width:100%}}
+    /* واکنش‌گرایی */
+    @media (max-width:720px){
+      .card{width:92%;padding:20px}
+      .candle img{height:120px}
+    }
   </style>
 </head>
 <body>
 
-  <div class="bg-wrap">
-    <!-- replace this with your image. keep the filename or update the src -->
-    <img id="bgImage" src="background.jpg" alt="background image - replace me">
-  </div>
-  <div class="bg-overlay"></div>
+<!--
+  توضیح: این یک قالب یک‌فایلی HTML/CSS/JS است.
+  - برای جایگزینی تصویر پس‌زمینه، فایل placeholder-background.jpg را با عکس خودتان جایگزین کنید (یا مسیر را در CSS تغییر دهید).
+  - برای شمعِ پایین صفحه، فایل candle.png را با تصویر شمع واقعی و با کیفیت جایگزین کنید.
+-->
 
-  <main class="card" role="main" aria-labelledby="title">
-    <h1 id="title">Enter the correct 4‑digit response</h1>
-    <p class="lead">لطفاً یک پاسخ صحیح ۴ رقمی وارد کنید — (English or Persian digits accepted)</p>
+<div class="scene" role="application" aria-label="Vintage answer scene">
+  <div class="vignette" aria-hidden="true"></div>
 
-    <div class="ornament" aria-hidden="true"></div>
+  <div class="card" role="region" aria-labelledby="cardTitle">
+    <h1 id="cardTitle">یک پاسخ صحیح 4 رقمی را وارد کنید</h1>
+    <p class="lead">(کد درست: 1402)</p>
 
-    <div class="input-row">
-      <input id="codeInput" class="code" maxlength="8" inputmode="numeric" pattern="[0-9۰-۹]*" placeholder="مثال: 1402 / ۱۴۰۲" aria-label="4-digit code">
-      <button id="checkBtn" class="check">Submit</button>
-    </div>
+    <form id="codeForm" autocomplete="off">
+      <label class="input-label" for="answer">رمز</label>
+      <div class="input-wrap">
+        <input id="answer" class="code" type="text" inputmode="numeric" maxlength="6" placeholder="____" aria-label="ورود رمز ۴ رقمی" />
+        <button type="submit" class="btn">ارسال</button>
+      </div>
+      <div class="hint" id="hintArea" aria-live="polite"></div>
+    </form>
 
-    <div class="msg" id="message" aria-live="polite"></div>
-
-    <p class="hint">فونت: کلاسیک قدیمی — حال و هوای وینتیج</p>
-  </main>
-
-  <!-- candle image at bottom: replace candle.png with a realistic candle of your choice -->
-  <img id="candle" src="candle.png" alt="candle - replace me">
-
-  <!-- modal -->
-  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <h2>تبریک!</h2>
-      <p id="modalText">لطفا پاکت 203 را باز کنید</p>
-      <button id="closeModal">باشه</button>
-    </div>
   </div>
 
-  <script>
-    // Utility: convert Persian digits to Latin digits
-    function persianToLatinDigits(str){
-      const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-      return str.replace(/[۰-۹]/g, d => persianDigits.indexOf(d));
+  <div class="candle" aria-hidden="true">
+    <img id="candleImg" src="candle.png" alt="candle" />
+  </div>
+
+</div>
+
+<!-- پاپ‌آپ موفقیت -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">آفرین!</h2>
+    <p>لطفا پاکت 203 را باز کنید</p>
+    <button id="closeModal">باشه</button>
+  </div>
+</div>
+
+<script>
+  // نگاشت ارقام فارسی/عربی به ارقام لاتین
+  const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  const arabicDigits  = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  function normalizeDigits(str){
+    if(!str) return '';
+    let out = '';
+    for(const ch of str){
+      if(persianDigits.indexOf(ch) > -1) out += persianDigits.indexOf(ch);
+      else if(arabicDigits.indexOf(ch) > -1) out += arabicDigits.indexOf(ch);
+      else out += ch;
+    }
+    return out.replace(/[^0-9]/g,'').trim();
+  }
+
+  const correct = '1402'; // جواب درست
+  const form = document.getElementById('codeForm');
+  const input = document.getElementById('answer');
+  const hint = document.getElementById('hintArea');
+  const modal = document.getElementById('modal');
+  const closeModal = document.getElementById('closeModal');
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    hint.textContent = '';
+    let val = input.value || '';
+    val = normalizeDigits(val);
+
+    if(val.length !== 4){
+      hint.textContent = 'کد باید ۴ رقم باشد؛ دوباره تلاش کنید.';
+      return;
     }
 
-    // normalize input: remove whitespace and punctuation, convert persian digits
-    function normalizeInput(raw){
-      if(!raw) return '';
-      raw = raw.trim();
-      // convert Persian digits
-      raw = persianToLatinDigits(raw);
-      // strip non-digits
-      raw = raw.replace(/[^0-9]/g,'');
-      return raw;
+    if(val === correct){
+      // نمایش پاپ‌آپ
+      modal.style.display = 'flex';
+      // خوانایی و فوکوس
+      closeModal.focus();
+    } else {
+      // انیمیشن خطا کوچک
+      hint.textContent = 'دوباره تلاش کنید';
+      input.animate([
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-8px)' },
+        { transform: 'translateX(8px)' },
+        { transform: 'translateX(0)' }
+      ], { duration: 420, easing: 'ease-out' });
     }
+  });
 
-    const correct = '1402'; // canonical correct 4-digit code
+  closeModal.addEventListener('click', ()=>{
+    modal.style.display = 'none';
+    input.value = '';
+    input.focus();
+  });
 
-    const input = document.getElementById('codeInput');
-    const btn = document.getElementById('checkBtn');
-    const msg = document.getElementById('message');
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const closeModal = document.getElementById('closeModal');
+  // دسترسی: بستن با ESC
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') modal.style.display = 'none';
+  });
 
-    function showMessage(text, color){
-      msg.textContent = text;
-      msg.style.color = color || 'rgba(239,230,218,0.95)';
-    }
-
-    function showModal(){
-      modalBackdrop.style.visibility = 'visible';
-      modalBackdrop.style.opacity = '1';
-      modalBackdrop.setAttribute('aria-hidden','false');
-    }
-    function hideModal(){
-      modalBackdrop.style.opacity = '0';
-      modalBackdrop.style.visibility = 'hidden';
-      modalBackdrop.setAttribute('aria-hidden','true');
-    }
-
-    btn.addEventListener('click', ()=>{
-      const val = normalizeInput(input.value);
-      if(val.length !== 4){
-        showMessage('کد باید ۴ رقم باشد — code must be 4 digits', '#e8c3b0');
-        return;
-      }
-
-      if(val === correct){
-        showMessage('', '');
-        showModal();
-      } else {
-        showMessage('دوباره تلاش کنید', '#f29b9b');
-        // small shake animation to input area
-        const card = document.querySelector('.card');
-        card.animate([
-          {transform: 'translateX(0)'},
-          {transform: 'translateX(-8px)'},
-          {transform: 'translateX(8px)'},
-          {transform: 'translateX(0)'}
-        ],{duration:350});
-      }
-    });
-
-    // enter key submits
-    input.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter') { btn.click(); }
-    });
-
-    closeModal.addEventListener('click', hideModal);
-    // clicking outside modal closes it
-    modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) hideModal(); });
-
-    // accessibility: focus input on load
-    window.addEventListener('load', ()=>{ input.focus(); });
-  </script>
+</script>
 
 </body>
 </html>
