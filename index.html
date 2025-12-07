@@ -1,190 +1,353 @@
-<!doctype html>
-<html lang="fa">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ورودی رمز — وینتج</title>
-
-  <!-- فونت‌های کلاسیک (قابل تغییر) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Old+Standard+TT&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#efe6da; /* وینتج روشن */
-      --card:#f8f3ef;
-      --accent:#5b3a29;
-      --muted:#8b7a6b;
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:'Playfair Display', 'Old Standard TT', serif;
-      background: radial-gradient(1200px 600px at 10% 20%, rgba(91,58,41,0.06), transparent), var(--bg);
-      -webkit-font-smoothing:antialiased;
-      direction:rtl;
-      color:var(--accent);
-      display:flex;align-items:center;justify-content:center;padding:24px;
-    }
-
-    /* پس‌زمینهٔ قابل جایگزینی (کاربر تصویر خودش را جایگزین کند) */
-    .scene{
-      position:relative;
-      width:980px;max-width:96vw;height:620px;max-height:86vh;
-      border-radius:18px;overflow:hidden;
-      box-shadow:0 18px 50px rgba(11,9,8,0.18);
-      background-image: url('placeholder-background.jpg'); /* جایگزین کنید */
-      background-size:cover;background-position:center;
-      display:flex;align-items:center;justify-content:center;
-    }
-
-    .vignette{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.28));pointer-events:none}
-
-    .card{
-      position:relative;z-index:5;width:560px;background:linear-gradient(180deg, rgba(255,255,245,0.9), rgba(250,245,240,0.86));
-      border-radius:12px;padding:34px 36px 46px;box-shadow:0 8px 30px rgba(10,8,6,0.18);
-      border:1px solid rgba(91,58,41,0.06);
-      text-align:center;
-    }
-
-    h1{font-family:'Cinzel', serif;margin:0 0 8px;font-size:24px;letter-spacing:1px}
-    p.lead{margin:0 0 18px;color:var(--muted)}
-
-    label.input-label{display:block;margin:4px 0 8px;font-weight:700;font-family:'Old Standard TT', serif;text-transform:none}
-
-    .input-wrap{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:8px}
-    input.code{
-      font-family:'Cinzel', 'Times New Roman', serif;
-      font-size:36px;padding:12px 18px;border-radius:8px;border:2px solid rgba(91,58,41,0.12);width:220px;text-align:center;outline:none;
-      background:transparent;
-      -moz-appearance:textfield;
-    }
-    input.code:focus{box-shadow:0 4px 18px rgba(91,58,41,0.12);border-color:var(--accent)}
-
-    button.btn{
-      background:linear-gradient(180deg,var(--accent),#40261a);color:#fff;border:0;padding:12px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Cinzel';
-      box-shadow:0 8px 20px rgba(64,38,26,0.28);
-    }
-
-    .hint{margin-top:12px;color:#b34f2f;font-weight:700;min-height:22px}
-
-    /* شمع در پایین صفحه (قابل جایگزینی) */
-    .candle{
-      position:absolute;bottom:32px;left:32px;z-index:10;display:flex;align-items:flex-end;gap:16px;pointer-events:none;
-      animation: fadeIn 1.8s ease-out forwards;
-      opacity:0;
-    }
-    .candle img{height:220px;filter:drop-shadow(0 28px 60px rgba(10,8,6,0.55));border-radius:10px;object-fit:contain}
-
-    /* پاپ‌آپ */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(6,4,3,0.52);display:none;align-items:center;justify-content:center;z-index:50}
-    .modal{background:var(--card);padding:28px;border-radius:12px;max-width:420px;text-align:center;border:1px solid rgba(91,58,41,0.08);box-shadow:0 20px 60px rgba(6,4,3,0.4)}
-    .modal h2{margin:0 0 8px;font-family:'Cinzel'}
-    .modal p{margin:0 0 16px}
-    .modal button{background:transparent;border:1px solid var(--accent);padding:8px 14px;border-radius:8px;cursor:pointer}
-
-    /* واکنش‌گرایی */
-    @media (max-width:720px){
-      .card{width:92%;padding:20px}
-      .candle img{height:120px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رمز عبور وینتیج حرفه‌ای</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background-image: url('https://example.com/your-vintage-background.jpg'); /* اینجا بک‌گراند وینتیج خودتون رو جایگزین کنید */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #4a2c2a;
+            text-align: center;
+            padding: 50px 20px;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+            /* انیمیشن VHS noise برای وینتیج */
+            animation: vintageNoise 0.1s infinite;
+        }
+        
+        @keyframes vintageNoise {
+            0%, 100% { background-position: 0 0; }
+            50% { background-position: 1px 1px; }
+        }
+        
+        /* Overlay برای حس وینتیج */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120,53,15,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,165,0,0.2) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: -1;
+            animation: subtleGlow 5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes subtleGlow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        /* محتوا مستقیم روی بک‌گراند، بدون باکس */
+        .main-content {
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .main-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            margin: 0 auto 40px;
+            background: linear-gradient(45deg, rgba(245, 245, 220, 0.7), rgba(250, 240, 230, 0.6)); /* نیمه‌شفاف برای وینتیج */
+            /* قاب حذف شد */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #666;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .image-placeholder:hover img {
+            transform: scale(1.05);
+        }
+        
+        label {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            animation: textGlow 2s ease-in-out infinite alternate;
+            background: rgba(255, 248, 220, 0.8); /* نیمه‌شفاف برای خوانایی */
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px rgba(139, 69, 19, 0.5); }
+            to { text-shadow: 0 0 10px rgba(139, 69, 19, 0.8); }
+        }
+        
+        input[type="text"] {
+            padding: 15px;
+            font-size: 28px;
+            font-family: 'Cinzel', serif;
+            border: 3px solid #8b4513;
+            border-radius: 8px;
+            width: 120px;
+            text-align: center;
+            background: linear-gradient(145deg, rgba(255, 248, 220, 0.9), rgba(240, 230, 140, 0.8));
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #a0522d;
+            box-shadow: 0 0 15px rgba(160, 82, 45, 0.5);
+            transform: scale(1.05);
+        }
+        
+        button {
+            margin-top: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(145deg, #8b4513, #a0522d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            animation: buttonPulse 2s infinite;
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        button:hover {
+            background: linear-gradient(145deg, #a0522d, #cd853f);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+        
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #dc143c;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+            background: rgba(220, 20, 60, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* شمع واقعی با GIF */
+        .candle-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+            width: 80px; /* اندازه شمع */
+            height: 120px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        .candle-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* سایه برای واقع‌گرایی */
+        }
+        
+        /* پاپ‌آپ بهبودیافته */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, rgba(255, 248, 220, 0.95), rgba(240, 230, 140, 0.9));
+            margin: 20% auto;
+            padding: 40px;
+            border: 3px solid #8b4513;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 450px;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            text-align: center;
+            animation: modalPop 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close {
+            color: #8b4513;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #a0522d;
+            transform: rotate(90deg);
+        }
+    </style>
 </head>
 <body>
-
-<div class="scene" role="application" aria-label="Vintage answer scene">
-  <div class="vignette" aria-hidden="true"></div>
-
-  <div class="card" role="region" aria-labelledby="cardTitle">
-    <h1 id="cardTitle">یک پاسخ صحیح 4 رقمی را وارد کنید</h1>
-
-    <form id="codeForm" autocomplete="off">
-      <label class="input-label" for="answer">رمز</label>
-      <div class="input-wrap">
-        <input id="answer" class="code" type="text" inputmode="numeric" maxlength="6" placeholder="____" aria-label="ورود رمز ۴ رقمی" />
-        <button type="submit" class="btn">ارسال</button>
-      </div>
-      <div class="hint" id="hintArea" aria-live="polite"></div>
-    </form>
-
-  </div>
-
-  <div class="candle" aria-hidden="true">
-    <img id="candleImg" src="background.jpg" alt="candle" />
-  </div>
-
-</div>
-
-<!-- پاپ‌آپ موفقیت -->
-<div class="modal-backdrop" id="modal">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h2 id=\"modalTitle\">پاسخ درست است</h2></h2>
-    <p>لطفا پاکت 203 را باز کنید</p>
-    <button id="closeModal">باشه</button>
-  </div>
-</div>
-
-<script>
-  // نگاشت ارقام فارسی/عربی به ارقام لاتین
-  const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-  const arabicDigits  = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-  function normalizeDigits(str){
-    if(!str) return '';
-    let out = '';
-    for(const ch of str){
-      if(persianDigits.indexOf(ch) > -1) out += persianDigits.indexOf(ch);
-      else if(arabicDigits.indexOf(ch) > -1) out += arabicDigits.indexOf(ch);
-      else out += ch;
-    }
-    return out.replace(/[^0-9]/g,'').trim();
-  }
-
-  const correct = '' // رمز درست حذف شد (اینجا مقدار قرار دهید); // جواب درست
-  const form = document.getElementById('codeForm');
-  const input = document.getElementById('answer');
-  const hint = document.getElementById('hintArea');
-  const modal = document.getElementById('modal');
-  const closeModal = document.getElementById('closeModal');
-
-  form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    hint.textContent = '';
-    let val = input.value || '';
-    val = normalizeDigits(val);
-
-    if(val.length !== 4){
-      hint.textContent = 'کد باید ۴ رقم باشد؛ دوباره تلاش کنید.';
-      return;
-    }
-
-    if(val === correct){
-      // نمایش پاپ‌آپ
-      modal.style.display = 'flex';
-      // خوانایی و فوکوس
-      closeModal.focus();
-    } else {
-      // انیمیشن خطا کوچک
-      hint.textContent = 'دوباره تلاش کنید';
-      input.animate([
-        { transform: 'translateX(0)' },
-        { transform: 'translateX(-8px)' },
-        { transform: 'translateX(8px)' },
-        { transform: 'translateX(0)' }
-      ], { duration: 420, easing: 'ease-out' });
-    }
-  });
-
-  closeModal.addEventListener('click', ()=>{
-    modal.style.display = 'none';
-    input.value = '';
-    input.focus();
-  });
-
-  // دسترسی: بستن با ESC
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') modal.style.display = 'none';
-  });
-
-</script>
-
+    <div class="main-content">
+        <div class="image-placeholder">
+            <!-- اینجا عکس خودتون رو جایگزین کنید -->
+            <img src="https://example.com/your-image.jpg" alt="عکس وینتیج" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+            <span style="display: none;">عکس رو اینجا قرار بدید</span>
+        </div>
+        
+        <label for="codeInput">یک پاسخ صحیح 4 رقمی را وارد کنید</label>
+        <input type="text" id="codeInput" maxlength="4" placeholder="____">
+        <br>
+        <button onclick="checkCode()">بررسی</button>
+        <div id="message" class="message"></div>
+    </div>
+    
+    <!-- شمع واقعی با GIF -->
+    <div class="candle-container">
+        <img src="https://media.giphy.com/media/3o7aDgf1343z4s9X8k/giphy.gif" alt="شمع واقعی" class="candle-gif">
+    </div>
+    
+    <!-- پاپ‌آپ -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>لطفا پاکت 203 را باز کنید</p>
+        </div>
+    </div>
+    
+    <script>
+        function normalizeNumber(num) {
+            // تبدیل اعداد فارسی/عربی به لاتین
+            const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+            const arabicDigits = '٠١٢٣٤٥٦٧٨٩';
+            const latinDigits = '0123456789';
+            let normalized = num.toString();
+            for (let i = 0; i < 10; i++) {
+                normalized = normalized.replace(new RegExp(persianDigits[i], 'g'), latinDigits[i]);
+                normalized = normalized.replace(new RegExp(arabicDigits[i], 'g'), latinDigits[i]);
+            }
+            return normalized;
+        }
+        
+        function checkCode() {
+            const input = document.getElementById('codeInput');
+            const message = document.getElementById('message');
+            const normalizedInput = normalizeNumber(input.value);
+            
+            if (normalizedInput === '1402') {
+                message.style.display = 'none';
+                document.getElementById('successModal').style.display = 'block';
+                input.blur(); // فوکوس رو بردار
+            } else {
+                message.textContent = 'دوباره تلاش کنید';
+                message.style.display = 'block';
+                input.value = '';
+                input.focus();
+                // لرزش input برای اشتباه
+                input.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => { input.style.animation = ''; }, 500);
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        // Enter key support
+        document.getElementById('codeInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkCode();
+            }
+        });
+        
+        // بستن modal با کلیک خارج
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // انیمیشن اولیه برای input
+        window.addEventListener('load', () => {
+            document.getElementById('codeInput').focus();
+        });
+    </script>
 </body>
 </html>
